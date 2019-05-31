@@ -58,11 +58,7 @@ public class MonsterStage extends AnchorPane {
 		this.trCorner.getChildren().addAll(hbxDicipline,hbxLife);
 		this.tMiddle.getChildren().addAll(lblAge= new Label(String.valueOf(mst.getAge())));
 		
-		Button btnMinus = new Button("tira");
-		btnMinus.setOnAction(e ->{
-			mst.setHp(mst.getHp()-1);
-			lblLife.setText(String.valueOf(mst.getHp()));
-		});
+		
 		
 	
 		AnchorPane.setRightAnchor(trCorner, 5d);
@@ -75,7 +71,7 @@ public class MonsterStage extends AnchorPane {
 		//AnchorPane.setRightAnchor(tMiddle, 200d);
 
 		
-		this.getChildren().addAll(trCorner,tlCorner,tMiddle,btnMinus);
+		this.getChildren().addAll(trCorner,tlCorner,tMiddle);
 
 	}
 
