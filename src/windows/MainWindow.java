@@ -3,6 +3,7 @@ package windows;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import randonStuff.GlobalStuff;
 import windows.stages.MonsterStage;
 import windows.stages.TamagoStage;
 
@@ -12,7 +13,8 @@ public class MainWindow extends Stage {
 
 	MonsterStage mstStage = new MonsterStage();
 	TamagoStage tmgStage = new TamagoStage();
-	
+	GlobalStuff glb = new GlobalStuff();
+	Scene cena;
 
 	public MainWindow() {
 
@@ -23,7 +25,17 @@ public class MainWindow extends Stage {
 	private void visualConfig() {
 		// TODO Auto-generated method stub
 
-		Scene cena = new Scene(tmgStage, 400, 500);
+		glb.setMethod("Monster");
+		
+		
+		
+		if(glb.getMethod()=="Tamago"){
+			this.cena = new Scene(tmgStage, 400, 500);
+		}else if(glb.getMethod()=="Monster"){
+			this.cena = new Scene(mstStage,400,500);
+		}
+		
+		
 		this.setScene(cena);
 		this.show();
 	}

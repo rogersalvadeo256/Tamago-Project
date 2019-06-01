@@ -3,9 +3,9 @@ package tamago;
 public class Monster {
 
 	private String name;
-	private int hp, food, water, bath, age, weight,discipline,poop;
+	private int hp, food, water, bath, age, weight, discipline, poop;
 	private String type;
-	
+
 	public int getWeight() {
 		return weight;
 	}
@@ -69,7 +69,7 @@ public class Monster {
 	public void setType(String type) {
 		this.type = type;
 	}
-	
+
 	public int getDiscipline() {
 		return discipline;
 	}
@@ -85,6 +85,5 @@ public class Monster {
 	public void setPoop(int poop) {
 		this.poop = poop;
 	}
-	
 
 }

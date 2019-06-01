@@ -2,6 +2,7 @@ package windows.stages;
 
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import tamago.Tamago;
 
@@ -9,7 +10,10 @@ public class TamagoStage extends AnchorPane{
 
 	Label ttlWarmth,ttlHappines;
 	Label lblWarmth,lblHappines,lblTime;
-	ToggleButton tgbLight = new ToggleButton("Off");
+	ToggleButton tgbLight = new ToggleButton("On");
+	
+	ImageView imgTamago;
+	
 	
 	Tamago tmg = new Tamago();
 	
@@ -25,11 +29,12 @@ public class TamagoStage extends AnchorPane{
 		tgbLight.setOnAction(e->{
 			if(tgbLight.getText()=="On") {
 				tgbLight.setText("Off");
+				this.setStyle("-fx-background-color:POWDERBLUE");
 			}else {
 				tgbLight.setText("On");
+				this.setStyle("-fx-background-color:WHITE");
 			}
 		});
-		
 		
 		
 		AnchorPane.setRightAnchor(tgbLight, 5d);
