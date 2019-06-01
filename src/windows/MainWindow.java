@@ -6,6 +6,7 @@ import javafx.stage.Stage;
 import randonStuff.GlobalStuff;
 import windows.stages.MonsterStage;
 import windows.stages.TamagoStage;
+import xmlCreator.StarterGlobal;
 
 public class MainWindow extends Stage {
 	// layout stuff
@@ -16,6 +17,8 @@ public class MainWindow extends Stage {
 	GlobalStuff glb = new GlobalStuff();
 	Scene cena;
 
+	StarterGlobal sg = new StarterGlobal();
+	
 	public MainWindow() {
 
 		visualConfig();
@@ -25,9 +28,10 @@ public class MainWindow extends Stage {
 	private void visualConfig() {
 		// TODO Auto-generated method stub
 
-		glb.setMethod("Monster");
+		glb.setMethod("Tamago");
+		glb.setFirstTime(true);
 		
-		
+		sg.starter(glb);
 		
 		if(glb.getMethod()=="Tamago"){
 			this.cena = new Scene(tmgStage, 400, 500);

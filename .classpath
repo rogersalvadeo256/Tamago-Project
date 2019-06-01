@@ -14,5 +14,20 @@
 	<classpathentry kind="lib" path="lib/javafx.media.jar"/>
 	<classpathentry kind="lib" path="lib/javafx.swing.jar"/>
 	<classpathentry kind="lib" path="lib/javafx.web.jar"/>
+	<classpathentry kind="lib" path="lib/JAXB/codemodel.jar"/>
+	<classpathentry kind="lib" path="lib/JAXB/dtd-parser.jar"/>
+	<classpathentry kind="lib" path="lib/JAXB/FastInfoset.jar"/>
+	<classpathentry kind="lib" path="lib/JAXB/istack-commons-runtime.jar"/>
+	<classpathentry kind="lib" path="lib/JAXB/istack-commons-tools.jar"/>
+	<classpathentry kind="lib" path="lib/JAXB/javax.activation-api.jar"/>
+	<classpathentry kind="lib" path="lib/JAXB/jaxb-api.jar"/>
+	<classpathentry kind="lib" path="lib/JAXB/jaxb-jxc.jar"/>
+	<classpathentry kind="lib" path="lib/JAXB/jaxb-runtime.jar"/>
+	<classpathentry kind="lib" path="lib/JAXB/jaxb-xjc.jar"/>
+	<classpathentry kind="lib" path="lib/JAXB/relaxng-datatype.jar"/>
+	<classpathentry kind="lib" path="lib/JAXB/rngom.jar"/>
+	<classpathentry kind="lib" path="lib/JAXB/stax-ex.jar"/>
+	<classpathentry kind="lib" path="lib/JAXB/txw2.jar"/>
+	<classpathentry kind="lib" path="lib/JAXB/xsom.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
