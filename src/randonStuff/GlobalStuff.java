@@ -7,13 +7,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class GlobalStuff {
 
-	private String method;
+	private boolean method;
 	private boolean firstTime;
 
-	public String getMethod() {	return method;}
+	public boolean getMethod() {	return method;}
 
 	@XmlAttribute
-	public void setMethod(String method) { this.method = method;}
+	public void setMethod(boolean method) { this.method = method;}
 
 	public boolean isFirstTime() {return firstTime;	}
 

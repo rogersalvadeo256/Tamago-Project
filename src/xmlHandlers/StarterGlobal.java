@@ -1,4 +1,4 @@
-package xmlCreator;
+package xmlHandlers;
 
 import java.io.File;
 
@@ -28,15 +28,15 @@ public class StarterGlobal {
 		
 		try {
 			
-			File file = new File("C:\\file.xml");
+			File file = new File("files/Global.xml");
 			JAXBContext jc = JAXBContext.newInstance(GlobalStuff.class);
 			Marshaller jm = jc.createMarshaller();
 
 			// output pretty printed
 			jm.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
-			//jm.marshal(glb, file);
-			jm.marshal(gl, System.out);
+			jm.marshal(gl, file);
+			//jm.marshal(gl, System.out);
 			
 		} catch (Exception e) {
 			// TODO: handle exception
