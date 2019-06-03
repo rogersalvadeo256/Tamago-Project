@@ -6,6 +6,8 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.ImageView;
@@ -15,7 +17,7 @@ import tamago.Tamago;
 import xmlHandlers.StarterGlobal;
 import xmlHandlers.StarterTamago;
 
-public class TamagoStage extends AnchorPane {
+public class TamagoStage extends AnchorPane implements Runnable{
 
 	Label ttlWarmth, ttlHappines;
 	Label lblWarmth, lblHappines, lblTime;
@@ -33,6 +35,27 @@ public class TamagoStage extends AnchorPane {
 
 	Tamago tmg = new Tamago();
 
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		
+		while (tmg.getHappines() > 0) {
+
+			try {
+				
+				lblHappines.setText(String.valueOf(tmg.getHappines()));
+				this.tmg.setHappines(tmg.getHappines() - 1);
+				System.out.println("ainda não bugou");
+			} catch (Exception e) {
+				System.out.println("Bugou rs");
+				e.printStackTrace();
+			}
+		}
+
+		
+	}
+	
+	
 	public TamagoStage() throws JAXBException {
 
 		if (getFirstTime(global)) {
@@ -60,6 +83,14 @@ public class TamagoStage extends AnchorPane {
 		lblHappines = new Label(String.valueOf(tmg.getHappines()));
 		lblTime = new Label(String.valueOf(tmg.getTime()));
 
+		lblHappines.textProperty().addListener(new ChangeListener<String>() {
+			@Override
+			public void changed(ObservableValue<? extends String> ov, String t, String t1) {
+				System.out.println("Label Text Changed");
+			}
+		});
+
+		
 		tgbLight.setOnAction(e -> {
 			if (tgbLight.getText() == "On") {
 				tgbLight.setText("Off");
@@ -69,10 +100,14 @@ public class TamagoStage extends AnchorPane {
 				this.setStyle("-fx-background-color:WHITE");
 			}
 		});
-		
-		
+
+		AnchorPane.setLeftAnchor(lblHappines, 200d);
+		AnchorPane.setTopAnchor(lblTime, 20d);
 		AnchorPane.setRightAnchor(tgbLight, 5d);
 		this.getChildren().addAll(lblWarmth, lblHappines, tgbLight);
+		
+		run();
+		
 	}
 
 	public boolean getFirstTime(File global) {
