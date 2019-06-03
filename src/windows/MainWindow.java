@@ -23,7 +23,7 @@ public class MainWindow extends Stage {
 	
 	Label lblDebug = new Label("a");
 	
-	TamagoStage tmgStage = new TamagoStage();
+	TamagoStage tmgStage;
 	GlobalStuff glb = new GlobalStuff();
 	Scene cena;
 
@@ -38,37 +38,43 @@ public class MainWindow extends Stage {
 	private void visualConfig() throws JAXBException {
 		// TODO Auto-generated method stub
 		File fg = new File("files/Global.xml");
-
+		File ft = new File("files/Tamago.xml");
+		
+		boolean method=true;
+		
 		cena = new Scene(layout,400,500);
 		
-		if (!fg.exists()) {
+		if (!fg.exists() && !ft.exists()) {
+			System.out.println("Here1");
 			glb.setMethod(true);
 			glb.setFirstTime(true);
 
 			sg.starter(glb);
 
 		} else {
-
-			boolean method = readXML(fg);
-
-			
-			if (method == true) {
-				this.cena = new Scene(tmgStage, 400, 500);
-				System.out.println("here");
-			} else{
-				this.cena = new Scene(mstStage, 400, 500);
-				System.out.println("here2");
-			}
-
-			this.setScene(cena);
-			this.show();
+			System.out.println("Here2");
+			method = getMethod(fg);
 			
 		}
+		tmgStage = new TamagoStage();
+		
+		if (method == true) {
+			this.cena = new Scene(tmgStage, 400, 500);
+			System.out.println("here");
+		} else{
+			this.cena = new Scene(mstStage, 400, 500);
+			System.out.println("here2");
+		}
+		
+
+		this.setScene(cena);
+		this.show();
+
 
 		
 	}
 
-	private boolean readXML(File global) throws JAXBException {
+	private boolean getMethod(File global) throws JAXBException {
 		// TODO Auto-generated method stub
 
 		try {
@@ -85,5 +91,7 @@ public class MainWindow extends Stage {
 		}
 
 	}
+	
+	
 
 }
