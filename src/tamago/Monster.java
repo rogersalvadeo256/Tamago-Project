@@ -1,15 +1,21 @@
 package tamago;
 
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class Monster {
 
 	private String name;
 	private int hp, food, water, bath, age, weight, discipline, poop;
-	private String type;
+	private String type,species;
 
 	public int getWeight() {
 		return weight;
 	}
 
+	@XmlElement
 	public void setWeight(int weight) {
 		this.weight = weight;
 	}
@@ -18,6 +24,7 @@ public class Monster {
 		return age;
 	}
 
+	@XmlElement
 	public void setAge(int age) {
 		this.age = age;
 	}
@@ -26,14 +33,16 @@ public class Monster {
 		return name;
 	}
 
+	@XmlElement
 	public void setName(String name) {
 		this.name = name;
 	}
-
+	
 	public int getHp() {
 		return hp;
 	}
 
+	@XmlElement
 	public void setHp(int hp) {
 		this.hp = hp;
 	}
@@ -42,6 +51,7 @@ public class Monster {
 		return food;
 	}
 
+	@XmlElement
 	public void setFood(int food) {
 		this.food = food;
 	}
@@ -50,6 +60,7 @@ public class Monster {
 		return water;
 	}
 
+	@XmlElement
 	public void setWater(int water) {
 		this.water = water;
 	}
@@ -58,6 +69,7 @@ public class Monster {
 		return bath;
 	}
 
+	@XmlElement
 	public void setBath(int bath) {
 		this.bath = bath;
 	}
@@ -66,6 +78,7 @@ public class Monster {
 		return type;
 	}
 
+	@XmlElement
 	public void setType(String type) {
 		this.type = type;
 	}
@@ -74,6 +87,7 @@ public class Monster {
 		return discipline;
 	}
 
+	@XmlElement
 	public void setDiscipline(int discipline) {
 		this.discipline = discipline;
 	}
@@ -82,8 +96,20 @@ public class Monster {
 		return poop;
 	}
 
+	@XmlElement
 	public void setPoop(int poop) {
 		this.poop = poop;
 	}
 
+	public String getSpecies() {
+		return species;
+	}
+
+	@XmlAttribute
+	public void setSpecies(String species) {
+		this.species = species;
+	}
+
+	
+	
 }

@@ -59,7 +59,7 @@ public class MainWindow extends Stage {
 		tmgStage = new TamagoStage();
 		
 		if (method == true) {
-			this.cena = new Scene(tmgStage, 400, 500);
+			this.cena = new Scene(tmgStage, 200, 200);
 			System.out.println("here");
 		} else{
 			this.cena = new Scene(mstStage, 400, 500);
@@ -67,6 +67,8 @@ public class MainWindow extends Stage {
 		}
 		
 
+		//this.setResizable(false);
+		
 		this.setScene(cena);
 		this.show();
 
