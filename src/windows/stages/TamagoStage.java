@@ -29,11 +29,25 @@ public class TamagoStage extends AnchorPane implements Runnable {
 	File tmgImg = new File("Resources/Finals/Tamagos/DigitalEgg.png");
 	File smile = new File("Resources/Finals/UI/smile.png");
 	File thermomether = new File("Resources/Finals/UI/thermometer.png");
-
+	
+	File lampOn = new File("Resources/Finals/UI/lampOn.png");
+	Image imgLampOn = new Image(lampOn.toURI().toString());
+	File lampOff = new File("Resources/Finals/UI/lampOff.png");
+	Image imgLampOff = new Image(lampOff.toURI().toString());
+	
+	ImageView lampImg = new ImageView(imgLampOn);
+	
+	File onButton = new File("Resources/Finals/UI/onButton.png");
+	Image imgOnBtn = new Image(onButton.toURI().toString());
+	File offButton = new File("Resources/Finals/UI/offButton.png");
+	Image imgOffBtn = new Image(offButton.toURI().toString());
+	
+	ImageView btnLamp = new ImageView(imgOnBtn);
+	
 	Image tamagoImg = new Image(tmgImg.toURI().toString());
 	Image smileImg = new Image(smile.toURI().toString());
 	Image warmthImg = new Image(thermomether.toURI().toString());
-
+		
 	ImageView imgTamago = new ImageView(tamagoImg);
 	ImageView imgSmile = new ImageView(smileImg);
 	ImageView imgWarmth = new ImageView(warmthImg);
@@ -113,22 +127,40 @@ public class TamagoStage extends AnchorPane implements Runnable {
 		tgbLight.setOnAction(e -> {
 			if (tgbLight.getText() == "On") {
 				tgbLight.setText("Off");
-				this.setStyle("-fx-background-color:POWDERBLUE");
+				
 			} else {
 				tgbLight.setText("On");
+				
+			}
+		});
+		
+		btnLamp.setOnMouseClicked(e->{
+			
+			if(btnLamp.getImage()==imgOnBtn) {
+				btnLamp.setImage(imgOffBtn);
+				lampImg.setImage(imgLampOff);
+				this.setStyle("-fx-background-color:POWDERBLUE");
+			}else {
+				btnLamp.setImage(imgOnBtn);
+				lampImg.setImage(imgLampOn);
 				this.setStyle("-fx-background-color:WHITE");
 			}
 		});
+		
+		btnLamp.setScaleX(2);
+		btnLamp.setScaleY(2);
 
 		AnchorPane.setLeftAnchor(vbHappy, 10d);
 		AnchorPane.setTopAnchor(vbHappy, 20d);
 		AnchorPane.setRightAnchor(vbWarmth, 10d);
 		AnchorPane.setTopAnchor(vbWarmth, 20d);
+		AnchorPane.setBottomAnchor(btnLamp, 10d);
+		btnLamp.setX(75);
 		//AnchorPane.setTopAnchor(lblTime, 20d);
 		//AnchorPane.setRightAnchor(tgbLight, 5d);
 		imgTamago.setX(50);
 		imgTamago.setY(30);
-		this.getChildren().addAll(vbWarmth, vbHappy, tgbLight, imgTamago);
+		this.getChildren().addAll(vbWarmth, vbHappy,imgTamago, btnLamp);
 
 		
 		run();
