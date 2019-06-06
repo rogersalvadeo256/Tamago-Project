@@ -14,9 +14,10 @@ public class StarterTamago {
 
 	public void starter(Tamago ta) {
 		
-		
+		tmg.setName(ta.getName());
 		tmg.setHappines(ta.getHappines());
-		
+		tmg.setTime(ta.getTime());
+		tmg.setWarmth(ta.getWarmth());
 		
 		try {
 			
@@ -28,6 +29,7 @@ public class StarterTamago {
 			jm.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
 			jm.marshal(ta, file);
+			jm.marshal(ta, System.out);
 			
 		} catch (Exception e) {
 			// TODO: handle exception
