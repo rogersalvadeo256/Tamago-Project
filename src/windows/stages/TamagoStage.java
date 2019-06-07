@@ -17,6 +17,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import randonStuff.GlobalStuff;
 import tamago.Tamago;
 import xmlHandlers.StarterGlobal;
@@ -67,6 +68,8 @@ public class TamagoStage extends AnchorPane {
 
 	private boolean runThis = true;
 	private boolean lights = true;
+	
+	
 
 	Tamago tmg = new Tamago();
 
@@ -74,9 +77,9 @@ public class TamagoStage extends AnchorPane {
 
 		if (getFirstTime(global)) {
 			System.out.println("here Tamago1");
-			tmg.setHappines(100);
+			tmg.setHappines(50);
 			tmg.setTime(1800);
-			tmg.setWarmth(100);
+			tmg.setWarmth(50);
 
 			st.starter(tmg);
 
@@ -109,10 +112,10 @@ public class TamagoStage extends AnchorPane {
 			}
 		});
 
-		Task counter = new Task<Void>() {
+		Task<Void> counter = new Task<Void>() {
 			protected Void call() throws InterruptedException {
 				while (runThis) {
-					for (int i = (int) tmg.getTime(); i > 0; i--) {
+					for (int i = (int) tmg.getTime(); i >= 0; i--) {
 						if (runThis) {
 							tmg.setTime(i);
 
@@ -120,7 +123,9 @@ public class TamagoStage extends AnchorPane {
 
 								@Override
 								public void run() {
-									lblTime.setText(String.valueOf(tmg.getTime()));
+									
+									
+									lblTime.setText(secondsToString((int) tmg.getTime()));
 
 								}
 							});
@@ -137,158 +142,208 @@ public class TamagoStage extends AnchorPane {
 			}
 		};
 
-		Task happyTask = new Task<Void>() {
+		Task<Void> happyTask = new Task<Void>() {
 			protected Void call() throws InterruptedException {
 
-				for (int i = tmg.getHappines(); i > 0; i--) {
-					if (runThis) {
+				while(runThis) {
+					if(runThis) {
+						int tmgHappy = tmg.getHappines();
 
-						tmg.setHappines(i);
-						Platform.runLater(new Runnable() {
+						
+						while(tmgHappy>0) {
+							if(runThis) {
+							tmgHappy = tmg.getHappines();
+							tmgHappy--;
+							tmg.setHappines(tmgHappy);
+							
+							
+							System.out.println(tmg.getHappines());
+							
+							Platform.runLater(new Runnable() {
 
-							@Override
-							public void run() {
-								lblHappines.setText(String.valueOf(tmg.getHappines()));
+								@Override
+								public void run() {
+									
+									lblHappines.setText(String.valueOf(tmg.getHappines()));
 
+								}
+							});
+							
+							
+							Thread.sleep(3000);
 							}
-						});
-
-						Thread.sleep(3000);
-
-					} else {
+							else {break;}
+							
+						}
+						
+						
+						
+						
+					}else {
 						break;
 					}
-
 				}
 				return null;
 			}
 
 		};
 
-		Task warmthTaskOff = new Task<Void>() {
-			protected Void call() throws Exception {
+		Task<Void> warmthTask = new Task<Void>() {
+			protected Void call() throws InterruptedException {
 
-				for (int i = tmg.getWarmth(); i > 0; i--) {
-					if (runThis) {
-						tmg.setWarmth(i);
-						System.out.println(i);
-						Platform.runLater(new Runnable() {
+				while (runThis) {
 
-							@Override
-							public void run() {
-								lblWarmth.setText(String.valueOf(tmg.getWarmth()));
+					for (int i = tmg.getWarmth(); i >= 0; i--) {
 
+						if (runThis) {
+
+							if (!lights) {
+
+								System.out.println(lights);
+								System.out.println(i);
+								tmg.setWarmth(i);
+								Platform.runLater(new Runnable() {
+
+									@Override
+									public void run() {
+										lblWarmth.setText(String.valueOf(tmg.getWarmth()));
+
+									}
+								});
+
+								Thread.sleep(3000);
+							} else {
+								System.out.println("break from the false");
+								break;
 							}
-						});
 
-						Thread.sleep(3000);
-					} else {
+						} else {
+							break;
+						}
+
+					}
+
+					for (int j = tmg.getWarmth(); j <= 100; j++) {
+
+						if (runThis) {
+
+							if (lights) {
+								System.out.println(lights);
+								System.out.println(j);
+								tmg.setWarmth(j);
+								Platform.runLater(new Runnable() {
+
+									@Override
+									public void run() {
+										lblWarmth.setText(String.valueOf(tmg.getWarmth()));
+
+									}
+								});
+
+								Thread.sleep(3000);
+							} else {
+								System.out.println("break from the truth");
+								break;
+							}
+
+						} else {
+							break;
+						}
+
+					}
+
+					if (!runThis) {
 						break;
 					}
 				}
-
 				return null;
 			}
 
 		};
 
-		Task warmthTaskOn = new Task<Void>() {
-			protected Void call() throws Exception {
-
-				for (int i = tmg.getWarmth(); i < 100; i++) {
-					if (runThis) {
-						tmg.setWarmth(i);
-						System.out.println(i);
-						Platform.runLater(new Runnable() {
-
-							@Override
-							public void run() {
-								lblWarmth.setText(String.valueOf(tmg.getWarmth()));
-
-							}
-						});
-
-						Thread.sleep(3000);
-					} else {
-						break;
-					}
-				}
-
-				return null;
-			}
-
-		};
-		
 		Thread count = new Thread(counter);
 		Thread happyThread = new Thread(happyTask);
-		Thread warmthThreadOff = new Thread(warmthTaskOff);
-		Thread warmthThreadOn = new Thread(warmthTaskOn);
-		
+		Thread warmthThread = new Thread(warmthTask);
+
 		count.start();
 		happyThread.start();
+		warmthThread.start();
 
-		if(lights=false) {
-			warmthThreadOff.start();
-			System.out.println(1);
-		}else if (lights=true) {
-			warmthThreadOn.start();
-			System.out.println(2);
-		}
-		
 		if (counter.isDone()) {
 			count.interrupt();
 		}
-		if (happyTask.isDone()) {
-			happyThread.interrupt();
-		}
-		if (warmthTaskOff.isDone()) {
-			warmthThreadOff.interrupt();
-		}
-		if(warmthTaskOn.isDone()) {
-			warmthThreadOn.interrupt();
-		}
+//		if (happyTask.isDone()) {
+//			happyThread.interrupt();
+//		}
+//		if (warmthTask.isDone()) {
+//			warmthThread.interrupt();
+//		}
 
+		imgTamago.setOnMouseClicked(e->{
+			tmg.setHappines(tmg.getHappines()+1);
+			lblHappines.setText(String.valueOf(tmg.getHappines()));
+		});
+		
+		
 		btnLamp.setOnMouseClicked(e -> {
 
 			if (btnLamp.getImage() == imgOnBtn) {
 				this.setStyle("-fx-background-color:POWDERBLUE");
-
+				lights = false;
 				btnLamp.setImage(imgOffBtn);
 				lampImg.setImage(imgLampOff);
-				
-				warmthThreadOff.start();
-				warmthTaskOn.cancel();
-				System.out.println(warmthTaskOff.getWorkDone());
-				
+				System.out.println("desliga");
+
 			} else {
 				this.setStyle("-fx-background-color:WHITE");
-				
+				lights = true;
 				btnLamp.setImage(imgOnBtn);
 				lampImg.setImage(imgLampOn);
-
-				warmthThreadOn.start();
-				System.out.println(warmthTaskOff.getWorkDone());
-				
-
+				System.out.println("liga");
 			}
 		});
 
 		btnLamp.setScaleX(2);
 		btnLamp.setScaleY(2);
+		
+		lblHappines.setFont(new Font("Super Legend Boy", 15));
+		lblTime.setFont(new Font("Super Legend Boy", 15));
+		lblWarmth.setFont(new Font("Super Legend Boy", 15));
+		
 
 		AnchorPane.setLeftAnchor(vbHappy, 10d);
 		AnchorPane.setTopAnchor(vbHappy, 20d);
 		AnchorPane.setRightAnchor(vbWarmth, 10d);
 		AnchorPane.setTopAnchor(vbWarmth, 20d);
 		AnchorPane.setBottomAnchor(btnLamp, 10d);
+		
+		
+		
 		btnLamp.setX(75);
 		// AnchorPane.setTopAnchor(lblTime, 20d);
 		// AnchorPane.setRightAnchor(tgbLight, 5d);
 		imgTamago.setX(50);
 		imgTamago.setY(30);
+		AnchorPane.setRightAnchor(lblTime, 75d);
 		this.getChildren().addAll(vbWarmth, vbHappy, imgTamago, btnLamp, lblTime);
 
 	}
+	
+	
+
+
+    private String secondsToString(int pTime) {
+        final int min = pTime/60;
+        final int sec = pTime-(min*60);
+
+        final String strMin = placeZeroIfNeede(min);
+        final String strSec = placeZeroIfNeede(sec);
+        return String.format("%s:%s",strMin,strSec);
+    }
+
+    private String placeZeroIfNeede(int number) {
+        return (number >=10)? Integer.toString(number):String.format("0%s",Integer.toString(number));
+    }
 
 	public boolean isRunThis() {
 		return runThis;
