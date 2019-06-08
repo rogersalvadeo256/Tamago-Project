@@ -20,6 +20,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import randonStuff.GlobalStuff;
 import tamago.Tamago;
+import windows.Name_Window;
 import xmlHandlers.StarterGlobal;
 import xmlHandlers.StarterTamago;
 
@@ -66,10 +67,10 @@ public class TamagoStage extends AnchorPane {
 	StarterTamago st = new StarterTamago();
 	StarterGlobal sg = new StarterGlobal();
 
+	private boolean counterRunning=true;
+	
 	private boolean runThis = true;
 	private boolean lights = true;
-	
-	
 
 	Tamago tmg = new Tamago();
 
@@ -89,7 +90,6 @@ public class TamagoStage extends AnchorPane {
 			sg.starter(glb);
 
 		} else {
-			System.out.println("here Tamago2");
 			System.out.println(getFirstTime(global));
 			tmg.setHappines(getTamago(tamagoFile).getHappines());
 			tmg.setTime(getTamago(tamagoFile).getTime());
@@ -114,27 +114,41 @@ public class TamagoStage extends AnchorPane {
 
 		Task<Void> counter = new Task<Void>() {
 			protected Void call() throws InterruptedException {
-				while (runThis) {
-					for (int i = (int) tmg.getTime(); i >= 0; i--) {
-						if (runThis) {
-							tmg.setTime(i);
+				while (true) {
+					if (runThis) {
+						for (int i = (int) tmg.getTime(); i >= 0; i--) {
+							if (runThis) {
+								tmg.setTime(i);
 
-							Platform.runLater(new Runnable() {
+								Platform.runLater(new Runnable() {
 
-								@Override
-								public void run() {
-									
-									
-									lblTime.setText(secondsToString((int) tmg.getTime()));
+									@Override
+									public void run() {
 
+										lblTime.setText(secondsToString((int) tmg.getTime()));
+
+									}
+								});
+
+								if(i==0) {
+									System.out.println("i==0");
+									runThis=false;
+									break;
 								}
-							});
+								
+								Thread.sleep(1000);
+							} else {
+								System.out.println("COCOCOCOMBO BREAKER");
+								
+								break;
+							}
 
-							Thread.sleep(1000);
-						} else {
-							break;
 						}
-
+					}
+					else {
+						System.out.println("breaked");
+						runThis=false;
+						break;
 					}
 				}
 				return null;
@@ -145,41 +159,35 @@ public class TamagoStage extends AnchorPane {
 		Task<Void> happyTask = new Task<Void>() {
 			protected Void call() throws InterruptedException {
 
-				while(runThis) {
-					if(runThis) {
+				while (runThis) {
+					if (runThis) {
 						int tmgHappy = tmg.getHappines();
 
-						
-						while(tmgHappy>0) {
-							if(runThis) {
-							tmgHappy = tmg.getHappines();
-							tmgHappy--;
-							tmg.setHappines(tmgHappy);
-							
-							
-							System.out.println(tmg.getHappines());
-							
-							Platform.runLater(new Runnable() {
+						while (tmgHappy > 0) {
+							if (runThis) {
+								tmgHappy = tmg.getHappines();
+								tmgHappy--;
+								tmg.setHappines(tmgHappy);
+								
 
-								@Override
-								public void run() {
-									
-									lblHappines.setText(String.valueOf(tmg.getHappines()));
+								Platform.runLater(new Runnable() {
 
-								}
-							});
-							
-							
-							Thread.sleep(3000);
+									@Override
+									public void run() {
+
+										lblHappines.setText(String.valueOf(tmg.getHappines()));
+
+									}
+								});
+
+								Thread.sleep(3000);
+							} else {
+								break;
 							}
-							else {break;}
-							
+
 						}
-						
-						
-						
-						
-					}else {
+
+					} else {
 						break;
 					}
 				}
@@ -233,11 +241,11 @@ public class TamagoStage extends AnchorPane {
 								tmg.setWarmth(j);
 								Platform.runLater(new Runnable() {
 
-									@Override
 									public void run() {
 										lblWarmth.setText(String.valueOf(tmg.getWarmth()));
 
-									}
+									};
+
 								});
 
 								Thread.sleep(3000);
@@ -270,8 +278,17 @@ public class TamagoStage extends AnchorPane {
 		warmthThread.start();
 
 		if (counter.isDone()) {
+			System.out.println("isDone");
 			count.interrupt();
+			runThis = false;
+			happyThread.interrupt();
+			warmthThread.interrupt();
+			new Name_Window();
+
 		}
+		
+		
+		
 //		if (happyTask.isDone()) {
 //			happyThread.interrupt();
 //		}
@@ -279,12 +296,11 @@ public class TamagoStage extends AnchorPane {
 //			warmthThread.interrupt();
 //		}
 
-		imgTamago.setOnMouseClicked(e->{
-			tmg.setHappines(tmg.getHappines()+1);
+		imgTamago.setOnMouseClicked(e -> {
+			tmg.setHappines(tmg.getHappines() + 1);
 			lblHappines.setText(String.valueOf(tmg.getHappines()));
 		});
-		
-		
+
 		btnLamp.setOnMouseClicked(e -> {
 
 			if (btnLamp.getImage() == imgOnBtn) {
@@ -305,20 +321,17 @@ public class TamagoStage extends AnchorPane {
 
 		btnLamp.setScaleX(2);
 		btnLamp.setScaleY(2);
-		
+
 		lblHappines.setFont(new Font("Super Legend Boy", 15));
 		lblTime.setFont(new Font("Super Legend Boy", 15));
 		lblWarmth.setFont(new Font("Super Legend Boy", 15));
-		
 
 		AnchorPane.setLeftAnchor(vbHappy, 10d);
 		AnchorPane.setTopAnchor(vbHappy, 20d);
 		AnchorPane.setRightAnchor(vbWarmth, 10d);
 		AnchorPane.setTopAnchor(vbWarmth, 20d);
 		AnchorPane.setBottomAnchor(btnLamp, 10d);
-		
-		
-		
+
 		btnLamp.setX(75);
 		// AnchorPane.setTopAnchor(lblTime, 20d);
 		// AnchorPane.setRightAnchor(tgbLight, 5d);
@@ -328,22 +341,19 @@ public class TamagoStage extends AnchorPane {
 		this.getChildren().addAll(vbWarmth, vbHappy, imgTamago, btnLamp, lblTime);
 
 	}
-	
-	
 
+	private String secondsToString(int pTime) {
+		final int min = pTime / 60;
+		final int sec = pTime - (min * 60);
 
-    private String secondsToString(int pTime) {
-        final int min = pTime/60;
-        final int sec = pTime-(min*60);
+		final String strMin = placeZeroIfNeede(min);
+		final String strSec = placeZeroIfNeede(sec);
+		return String.format("%s:%s", strMin, strSec);
+	}
 
-        final String strMin = placeZeroIfNeede(min);
-        final String strSec = placeZeroIfNeede(sec);
-        return String.format("%s:%s",strMin,strSec);
-    }
-
-    private String placeZeroIfNeede(int number) {
-        return (number >=10)? Integer.toString(number):String.format("0%s",Integer.toString(number));
-    }
+	private String placeZeroIfNeede(int number) {
+		return (number >= 10) ? Integer.toString(number) : String.format("0%s", Integer.toString(number));
+	}
 
 	public boolean isRunThis() {
 		return runThis;
@@ -408,4 +418,14 @@ public class TamagoStage extends AnchorPane {
 		return this.tmg;
 	}
 
+	public boolean isCounterRunning() {
+		return counterRunning;
+	}
+
+	public void setCounterRunning(boolean counterRunning) {
+		this.counterRunning = counterRunning;
+	}
+
+	
+	
 }
