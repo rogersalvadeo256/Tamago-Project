@@ -31,7 +31,6 @@ public class Name_Window extends Stage{
 			if(txtName.getText()!="") {
 				this.mst.setName(txtName.getText());
 				
-				mw.setScene(MonsterStage());
 				this.close();
 			}else {
 				this.lblWarning.setVisible(true);
