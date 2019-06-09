@@ -6,8 +6,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import randonStuff.GlobalStuff;
 import tamago.Monster;
-import windows.stages.MonsterStage;
 
 public class Name_Window extends Stage{
 
@@ -15,8 +15,9 @@ public class Name_Window extends Stage{
 	Button btnOk;
 	Label lblText,lblWarning;
 	VBox layout=new VBox();
+	GlobalStuff gs = new GlobalStuff();
 	Monster mst = new Monster();
-	
+		
 	public Name_Window(MainWindow mw) {
 		
 		lblText = new Label("Give your new monster a Name");
@@ -28,12 +29,15 @@ public class Name_Window extends Stage{
 		
 		btnOk.setOnAction(e->{
 			
-			if(txtName.getText()!="") {
+			if(!txtName.getText().trim().isEmpty()) {
 				this.mst.setName(txtName.getText());
+									
+				mw.setScene(false);
+				gs.setMethod(false);
 				
 				this.close();
-			}else {
-				this.lblWarning.setVisible(true);
+			}else{
+				
 			}
 			
 		});

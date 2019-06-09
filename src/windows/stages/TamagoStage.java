@@ -20,6 +20,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import randonStuff.GlobalStuff;
 import tamago.Tamago;
+import windows.MainWindow;
 import windows.Name_Window;
 import xmlHandlers.StarterGlobal;
 import xmlHandlers.StarterTamago;
@@ -74,7 +75,7 @@ public class TamagoStage extends AnchorPane {
 
 	Tamago tmg = new Tamago();
 
-	public TamagoStage() throws JAXBException {
+	public TamagoStage(MainWindow mw) throws JAXBException {
 
 		if (getFirstTime(global)) {
 			System.out.println("here Tamago1");
@@ -283,7 +284,7 @@ public class TamagoStage extends AnchorPane {
 			runThis = false;
 			happyThread.interrupt();
 			warmthThread.interrupt();
-			new Name_Window();
+			new Name_Window(mw);
 
 		}
 		
