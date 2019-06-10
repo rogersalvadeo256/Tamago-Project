@@ -68,8 +68,8 @@ public class TamagoStage extends AnchorPane {
 	StarterTamago st = new StarterTamago();
 	StarterGlobal sg = new StarterGlobal();
 
-	private boolean counterRunning=true;
-	
+	private boolean counterRunning = true;
+
 	private boolean runThis = true;
 	private boolean lights = true;
 
@@ -114,7 +114,7 @@ public class TamagoStage extends AnchorPane {
 		});
 
 		Task<Void> counter = new Task<Void>() {
-			protected Void call() throws InterruptedException {
+			protected Void call() throws InterruptedException, JAXBException {
 				while (true) {
 					if (runThis) {
 						for (int i = (int) tmg.getTime(); i >= 0; i--) {
@@ -131,24 +131,24 @@ public class TamagoStage extends AnchorPane {
 									}
 								});
 
-								if(i==0) {
-									System.out.println("i==0");
-									runThis=false;
+								if (i == 0) {
+									if (getMethod(global)) {
+										new Name_Window(mw);
+									}
+									runThis = false;
 									break;
 								}
-								
+
 								Thread.sleep(1000);
 							} else {
-								System.out.println("COCOCOCOMBO BREAKER");
-								
+
 								break;
 							}
 
 						}
-					}
-					else {
+					} else {
 						System.out.println("breaked");
-						runThis=false;
+						runThis = false;
 						break;
 					}
 				}
@@ -169,7 +169,6 @@ public class TamagoStage extends AnchorPane {
 								tmgHappy = tmg.getHappines();
 								tmgHappy--;
 								tmg.setHappines(tmgHappy);
-								
 
 								Platform.runLater(new Runnable() {
 
@@ -287,9 +286,7 @@ public class TamagoStage extends AnchorPane {
 			new Name_Window(mw);
 
 		}
-		
-		
-		
+
 //		if (happyTask.isDone()) {
 //			happyThread.interrupt();
 //		}
@@ -427,6 +424,4 @@ public class TamagoStage extends AnchorPane {
 		this.counterRunning = counterRunning;
 	}
 
-	
-	
 }

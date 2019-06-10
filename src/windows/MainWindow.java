@@ -67,7 +67,7 @@ public class MainWindow extends Stage {
 			prtStage = tmgStage;
 		}
 
-		if (method == true) {
+		if (getMethod(fg) == true) {
 			cena = new Scene(tmgStage, 200, 200);
 			System.out.println("here");
 		} else {
@@ -96,10 +96,27 @@ public class MainWindow extends Stage {
 		this.show();
 
 	}
+	
+	public Scene setCena(Scene cena) {
+		Scene essaCena=cena;
+		
+		return essaCena;
+	}
 
-	public boolean setMethod(boolean mtd) {
+	public void setMethod(boolean mtd) {
 
-		return this.method = mtd;
+		StarterGlobal sg = new StarterGlobal();
+		GlobalStuff gs = new GlobalStuff();
+		gs.setFirstTime(glb.isFirstTime());
+		gs.setMethod(mtd);
+
+		try {
+			sg.starter(gs);
+			System.out.println(gs);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
 
 	}
 
@@ -121,23 +138,6 @@ public class MainWindow extends Stage {
 
 	}
 
-	public void setScene(boolean method) {
-
-		if (method) {
-			prtStage = tmgStage;
-		} else {
-			prtStage = mstStage;
-		}
-
-	}
-	
-	public Scene checkScene() {
-		return cena;
-	}
-
-	public Parent getParent() {
-		return prtStage;
-	}
 
 	private void saveTmg(Tamago tmg) {
 
