@@ -19,6 +19,7 @@ public class StarterGlobal {
 	public void starter(GlobalStuff gl) {
 
 		gl.setFirstTime(gl.isFirstTime());
+		
 
 		gl.setMethod(gl.getMethod());
 
