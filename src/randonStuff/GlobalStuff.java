@@ -10,16 +10,22 @@ public class GlobalStuff {
 	private boolean method;
 	private boolean firstTime;
 
-	public boolean getMethod() {	return method;}
+	public boolean getMethod() {
+		return method;
+	}
 
 	@XmlAttribute
-	public void setMethod(boolean method) { this.method = method;}
+	public void setMethod(boolean method) {
+		this.method = method;
+	}
 
-	public boolean isFirstTime() {return firstTime;	}
+	public boolean isFirstTime() {
+		return firstTime;
+	}
 
 	@XmlElement
-	public void setFirstTime(boolean firstTime) {this.firstTime = firstTime;}
+	public void setFirstTime(boolean firstTime) {
+		this.firstTime = firstTime;
+	}
 
-	
-	
 }

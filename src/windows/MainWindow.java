@@ -6,8 +6,6 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
-import javafx.application.Platform;
-import javafx.concurrent.Task;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -38,15 +36,11 @@ public class MainWindow extends Stage {
 
 	boolean method = true;
 
-	boolean runThis=true;
-	
-	Parent prtStage;
-	
-	
+	boolean runThis = true;
 
+	Parent prtStage;
 
 	StarterGlobal sg = new StarterGlobal();
-	
 
 	public MainWindow() throws JAXBException {
 
@@ -54,6 +48,7 @@ public class MainWindow extends Stage {
 
 	}
 
+	@SuppressWarnings("unused")
 	private void visualConfig() throws JAXBException {
 		// TODO Auto-generated method stub
 		File fg = new File("files/Global.xml");
@@ -75,8 +70,6 @@ public class MainWindow extends Stage {
 			System.out.println("here2");
 		}
 
-		
-
 		// this.setResizable(false);
 
 		this.setOnCloseRequest(e -> {
@@ -96,10 +89,10 @@ public class MainWindow extends Stage {
 		this.show();
 
 	}
-	
+
 	public Scene setCena(Scene cena) {
-		Scene essaCena=cena;
-		
+		Scene essaCena = cena;
+
 		return essaCena;
 	}
 
@@ -116,7 +109,6 @@ public class MainWindow extends Stage {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-		
 
 	}
 
@@ -138,7 +130,6 @@ public class MainWindow extends Stage {
 
 	}
 
-
 	private void saveTmg(Tamago tmg) {
 
 		ta.setHappines(tmg.getHappines());
@@ -150,7 +141,8 @@ public class MainWindow extends Stage {
 		stm.starter(ta);
 
 	}
-	
+
+	@SuppressWarnings("unused")
 	private void saveMst(Monster mst) {
 		ms.setAge(mst.getAge());
 		ms.setBath(mst.getBath());
@@ -163,12 +155,10 @@ public class MainWindow extends Stage {
 		ms.setType(mst.getType());
 		ms.setWater(mst.getWater());
 		ms.setWeight(mst.getWeight());
-		
-		MonsterStarter smt= new MonsterStarter();
+
+		MonsterStarter smt = new MonsterStarter();
 		smt.starter(ms);
-		
-		
-		
+
 	}
 
 }

@@ -1,8 +1,5 @@
 package windows;
 
-import javax.xml.bind.JAXBException;
-
-import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -38,10 +35,8 @@ public class Name_Window extends Stage {
 			if (!txtName.getText().trim().isEmpty()) {
 				this.mst.setName(txtName.getText());
 
-				
 				mw.setMethod(false);
-				
-				
+
 				this.close();
 			} else {
 

@@ -9,7 +9,7 @@ public class Monster {
 
 	private String name;
 	private int hp, food, water, bath, age, weight, discipline, poop;
-	private String type,species;
+	private String type, species;
 
 	public int getWeight() {
 		return weight;
@@ -37,7 +37,7 @@ public class Monster {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
 	public int getHp() {
 		return hp;
 	}
@@ -110,6 +110,4 @@ public class Monster {
 		this.species = species;
 	}
 
-	
-	
 }

@@ -12,7 +12,6 @@ public class MonsterStarter {
 	Monster ms = new Monster();
 
 	public void starter(Monster mst) {
-	
 
 		ms.setAge(mst.getAge());
 		ms.setBath(mst.getBath());
@@ -41,7 +40,6 @@ public class MonsterStarter {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-
 
 	}
 
