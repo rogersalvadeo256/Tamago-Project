@@ -9,6 +9,8 @@ import model.TamagoState;
 
 public class TamagoController {
 
+    private static final int CHANGE_INTERVAL_TICKS = 3;
+
     public interface Listener {
         void onStateUpdated(TamagoState state);
 
@@ -78,7 +80,7 @@ public class TamagoController {
             state.setTime(Math.max(0, state.getTime() - 1));
             changeTick++;
 
-            if (changeTick >= 3) {
+            if (changeTick >= CHANGE_INTERVAL_TICKS) {
                 changeTick = 0;
                 state.setHappiness(Math.max(0, state.getHappiness() - 1));
 

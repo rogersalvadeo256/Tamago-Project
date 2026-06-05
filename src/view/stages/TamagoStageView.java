@@ -17,6 +17,9 @@ import view.NameWindowView;
 
 public class TamagoStageView extends AnchorPane {
 
+    private static final String LIGHTS_ON_STYLE = "-fx-background-color:WHITE";
+    private static final String LIGHTS_OFF_STYLE = "-fx-background-color:#2d3e50";
+
     private final Label lblWarmth = new Label();
     private final Label lblHappiness = new Label();
     private final Label lblTime = new Label();
@@ -106,13 +109,13 @@ public class TamagoStageView extends AnchorPane {
         controller.setLightsOn(lightsOn);
 
         if (lightsOn) {
-            setStyle("-fx-background-color:WHITE");
+            setStyle(LIGHTS_ON_STYLE);
             btnLamp.setImage(imgOnBtn);
             lampImg.setImage(imgLampOn);
             return;
         }
 
-        setStyle("-fx-background-color:POWDERBLUE");
+        setStyle(LIGHTS_OFF_STYLE);
         btnLamp.setImage(imgOffBtn);
         lampImg.setImage(imgLampOff);
     }

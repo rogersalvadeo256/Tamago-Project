@@ -9,6 +9,10 @@ import repository.XmlRepository;
 
 public class GameFacade {
 
+    private static final int DEFAULT_TAMAGO_DURATION_SECONDS = 1800;
+    private static final int DEFAULT_ATTRIBUTE_VALUE = 50;
+    private static final int MAX_ATTRIBUTE_VALUE = 100;
+
     private static final String GLOBAL_FILE = "Global.xml";
     private static final String TAMAGO_FILE = "Tamago.xml";
     private static final String MONSTER_FILE = "Monster.xml";
@@ -86,18 +90,18 @@ public class GameFacade {
 
     private TamagoState createDefaultTamago() {
         TamagoState tamago = new TamagoState();
-        tamago.setTime(1800);
-        tamago.setWarmth(50);
-        tamago.setHappiness(50);
+        tamago.setTime(DEFAULT_TAMAGO_DURATION_SECONDS);
+        tamago.setWarmth(DEFAULT_ATTRIBUTE_VALUE);
+        tamago.setHappiness(DEFAULT_ATTRIBUTE_VALUE);
         return tamago;
     }
 
     private MonsterState createDefaultMonster() {
         MonsterState monster = new MonsterState();
         monster.setHp(250);
-        monster.setFood(100);
-        monster.setWater(100);
-        monster.setDiscipline(100);
+        monster.setFood(MAX_ATTRIBUTE_VALUE);
+        monster.setWater(MAX_ATTRIBUTE_VALUE);
+        monster.setDiscipline(MAX_ATTRIBUTE_VALUE);
         monster.setAge(1);
         return monster;
     }

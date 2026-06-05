@@ -7,16 +7,16 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class GlobalSettings {
 
-    private boolean method = true;
+    private boolean tamagoMode = true;
     private boolean firstTime = true;
 
     public boolean isMethod() {
-        return method;
+        return tamagoMode;
     }
 
-    @XmlAttribute
+    @XmlAttribute(name = "method")
     public void setMethod(boolean method) {
-        this.method = method;
+        this.tamagoMode = method;
     }
 
     public boolean isFirstTime() {
