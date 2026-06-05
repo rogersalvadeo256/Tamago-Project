@@ -2,20 +2,16 @@ package main;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-import windows.MainWindow;
+import view.MainWindow;
 
 public class Main extends Application {
 
-	@Override
-	public void start(Stage stage) throws Exception {
-		// TODO Auto-generated method stub
+    @Override
+    public void start(Stage stage) {
+        new MainWindow();
+    }
 
-		new MainWindow();
-
-	}
-
-	public static void main(String[] args) {
-		launch(args);
-	}
-
+    public static void main(String[] args) {
+        launch(args);
+    }
 }
