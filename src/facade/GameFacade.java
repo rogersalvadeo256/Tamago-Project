@@ -12,6 +12,7 @@ public class GameFacade {
     private static final int DEFAULT_TAMAGO_DURATION_SECONDS = 1800;
     private static final int DEFAULT_ATTRIBUTE_VALUE = 50;
     private static final int MAX_ATTRIBUTE_VALUE = 100;
+    private static final int DEFAULT_MONSTER_HP = 250;
 
     private static final String GLOBAL_FILE = "Global.xml";
     private static final String TAMAGO_FILE = "Tamago.xml";
@@ -34,7 +35,7 @@ public class GameFacade {
             saveMonster(monster);
 
             settings.setFirstTime(false);
-            settings.setMethod(true);
+            settings.setTamagoMode(true);
             saveGlobal(settings);
             return;
         }
@@ -45,7 +46,7 @@ public class GameFacade {
     }
 
     public boolean isTamagoMode() {
-        return loadGlobal().isMethod();
+        return loadGlobal().isTamagoMode();
     }
 
     public TamagoState loadTamago() {
@@ -70,7 +71,7 @@ public class GameFacade {
         saveMonster(monster);
 
         GlobalSettings settings = loadGlobal();
-        settings.setMethod(false);
+        settings.setTamagoMode(false);
         settings.setFirstTime(false);
         saveGlobal(settings);
     }
@@ -98,7 +99,7 @@ public class GameFacade {
 
     private MonsterState createDefaultMonster() {
         MonsterState monster = new MonsterState();
-        monster.setHp(250);
+        monster.setHp(DEFAULT_MONSTER_HP);
         monster.setFood(MAX_ATTRIBUTE_VALUE);
         monster.setWater(MAX_ATTRIBUTE_VALUE);
         monster.setDiscipline(MAX_ATTRIBUTE_VALUE);

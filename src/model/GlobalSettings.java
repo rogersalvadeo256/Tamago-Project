@@ -10,13 +10,13 @@ public class GlobalSettings {
     private boolean tamagoMode = true;
     private boolean firstTime = true;
 
-    public boolean isMethod() {
+    public boolean isTamagoMode() {
         return tamagoMode;
     }
 
     @XmlAttribute(name = "method")
-    public void setMethod(boolean method) {
-        this.tamagoMode = method;
+    public void setTamagoMode(boolean tamagoMode) {
+        this.tamagoMode = tamagoMode;
     }
 
     public boolean isFirstTime() {

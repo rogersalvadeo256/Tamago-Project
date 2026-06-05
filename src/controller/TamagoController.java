@@ -10,6 +10,8 @@ import model.TamagoState;
 public class TamagoController {
 
     private static final int CHANGE_INTERVAL_TICKS = 3;
+    private static final int MIN_ATTRIBUTE_VALUE = 0;
+    private static final int MAX_ATTRIBUTE_VALUE = 100;
 
     public interface Listener {
         void onStateUpdated(TamagoState state);
@@ -53,7 +55,7 @@ public class TamagoController {
 
     public void pet() {
         synchronized (state) {
-            state.setHappiness(Math.min(100, state.getHappiness() + 1));
+            state.setHappiness(Math.min(MAX_ATTRIBUTE_VALUE, state.getHappiness() + 1));
         }
         notifyState();
     }
@@ -77,19 +79,20 @@ public class TamagoController {
         boolean expired = false;
 
         synchronized (state) {
-            state.setTime(Math.max(0, state.getTime() - 1));
+            state.setTime(Math.max(MIN_ATTRIBUTE_VALUE, state.getTime() - 1));
             changeTick++;
 
             if (changeTick >= CHANGE_INTERVAL_TICKS) {
                 changeTick = 0;
-                state.setHappiness(Math.max(0, state.getHappiness() - 1));
+                state.setHappiness(Math.max(MIN_ATTRIBUTE_VALUE, state.getHappiness() - 1));
 
                 int warmthDelta = lightsOn ? 1 : -1;
-                int warmth = Math.max(0, Math.min(100, state.getWarmth() + warmthDelta));
+                int warmth = Math.max(MIN_ATTRIBUTE_VALUE,
+                        Math.min(MAX_ATTRIBUTE_VALUE, state.getWarmth() + warmthDelta));
                 state.setWarmth(warmth);
             }
 
-            if (state.getTime() <= 0) {
+            if (state.getTime() <= MIN_ATTRIBUTE_VALUE) {
                 expired = true;
                 running.set(false);
             }

@@ -9,6 +9,10 @@ import model.MonsterState;
 
 public class MonsterStageView extends AnchorPane {
 
+    private static final double SIDE_MARGIN = 5d;
+    private static final double TOP_MARGIN = 20d;
+    private static final double CENTER_LEFT = 180d;
+
     public MonsterStageView(MonsterState monster) {
         HBox hbxLife = createMetric("HP: ", monster.getHp());
         HBox hbxFood = createMetric("Hunger: ", monster.getFood());
@@ -20,12 +24,12 @@ public class MonsterStageView extends AnchorPane {
         VBox rightCorner = new VBox(hbxDiscipline, hbxLife);
         VBox middle = new VBox(hbxAge);
 
-        AnchorPane.setLeftAnchor(leftCorner, 5d);
-        AnchorPane.setTopAnchor(leftCorner, 20d);
-        AnchorPane.setRightAnchor(rightCorner, 5d);
-        AnchorPane.setTopAnchor(rightCorner, 20d);
-        AnchorPane.setLeftAnchor(middle, 180d);
-        AnchorPane.setTopAnchor(middle, 20d);
+        AnchorPane.setLeftAnchor(leftCorner, SIDE_MARGIN);
+        AnchorPane.setTopAnchor(leftCorner, TOP_MARGIN);
+        AnchorPane.setRightAnchor(rightCorner, SIDE_MARGIN);
+        AnchorPane.setTopAnchor(rightCorner, TOP_MARGIN);
+        AnchorPane.setLeftAnchor(middle, CENTER_LEFT);
+        AnchorPane.setTopAnchor(middle, TOP_MARGIN);
 
         getChildren().addAll(leftCorner, rightCorner, middle);
     }

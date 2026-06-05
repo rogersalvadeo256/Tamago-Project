@@ -34,6 +34,7 @@ public class XmlRepository {
             Object value = unmarshaller.unmarshal(filePath.toFile());
             return type.cast(value);
         } catch (JAXBException ex) {
+            System.err.println("Failed to read XML file '" + fileName + "': " + ex.getMessage());
             return defaultSupplier.get();
         }
     }
@@ -46,7 +47,8 @@ public class XmlRepository {
             Marshaller marshaller = context.createMarshaller();
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
             marshaller.marshal(value, filePath.toFile());
-        } catch (JAXBException | IOException ignored) {
+        } catch (JAXBException | IOException ex) {
+            System.err.println("Failed to write XML file '" + fileName + "': " + ex.getMessage());
         }
     }
 
